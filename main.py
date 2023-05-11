@@ -3,8 +3,6 @@ import torch
 # from Model import CNN, train
 # from dataloader import data_loaders, save_net
 
-
-
 parser = argparse.ArgumentParser(description='Training Config', add_help=False)
 
 parser.add_argument('--root_train', default=r'/home/eranbamani/Documents/data_PointProject/MarkerData_Reg/train', metavar='DIR',
@@ -44,6 +42,7 @@ parser.add_argument("--load_model", default=False, type=str)
 
 
 def main(args_config, checkpoint=None, trans_learn=False):
+
     size = args_config.img_size
     train_path = args_config.root_train
 
