@@ -14,11 +14,9 @@ def trainTestSplit(dataset, TTR):
     return trainDataset, valDataset
 
 class RegPointDataset(Dataset):
-    def __init__(self, data_array, data_transforms, dir_root, classes):
+    def __init__(self, data_array, data_transforms):
         self.transform = data_transforms
-        self.dir_img = dir_root
         self.data_array = data_array
-        self.classes = classes
 
     def __len__(self):
         return len(self.data_array)
@@ -32,9 +30,17 @@ class RegPointDataset(Dataset):
         return img_transform, label
 
 
-def data_loaders(args_config, classes):
+def data_loaders(args_config, root_data):
 
-    data = pd.read_csv(args_config.csv_root, sep='\t', index_col=False)
+    data = pd.read_csv(root_data, delimiter=',')
+    print('data_shape : {}'
+          '\n10-start_column : {}'.format(data.shape,
+                                        data.head(10)))
+    print(data.describe())
+    category = [i for i in data.keys() if i.endswith('category')]
+    grouped = data.groupby(category[0])
+    print(grouped.mean())
+
     data_array = np.array(data)
 
     train_data, test_data = train_test_split(data_array, test_size=0.1, random_state=42)
@@ -43,21 +49,20 @@ def data_loaders(args_config, classes):
     data_transforms = {
             'train':
                 transforms.Compose([
-                    transforms.Resize((args_config.img_size, args_config.img_size)),
-                    transforms.ColorJitter(brightness=.5, hue=.3),
-                    transforms.GaussianBlur(kernel_size=(5, 9), sigma=(0.1, 5)),
+                    # transforms.ColorJitter(brightness=.5, hue=.3),
+                    # transforms.GaussianBlur(kernel_size=(5, 9), sigma=(0.1, 5)),
                     transforms.ToTensor(),
                 ]),
 
             'test':
                 transforms.Compose([
-                    transforms.Resize((args_config.img_size, args_config.img_size)),
                     transforms.ToTensor()
                 ])
         }
-    train_dataset = RegPointDataset(train_data, data_transforms['train'], args_config.img_root, classes)
-    val_dataset = RegPointDataset(val_data, data_transforms['test'], args_config.img_root, classes)
-    test_dataset = RegPointDataset(test_data, data_transforms['test'], args_config.img_root, classes)
+
+    train_dataset = RegPointDataset(train_data, data_transforms['train'])
+    val_dataset = RegPointDataset(val_data, data_transforms['test'])
+    test_dataset = RegPointDataset(test_data, data_transforms['test'])
 
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args_config.batch_size,
                                               shuffle=True, num_workers=args_config.workers, drop_last=args_config.drop_last)
