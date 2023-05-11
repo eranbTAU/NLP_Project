@@ -57,6 +57,7 @@ def main(args_config, checkpoint=None, trans_learn=False):
     model = PreTrmodel(args_config)
 
     model = model.to(device)
+    #dsadsa
 
     for param in list(model.named_parameters()):
         prune.l1_unstructured(model.albert.embeddings.word_embeddings, name="weight", amount=3)
