@@ -3,17 +3,18 @@ import time
 import torch
 import re
 import matplotlib.pyplot as plt
+import datetime
 
 def path2data(args_config):
     for r, d, f in os.walk(args_config.data_root):
-        req_data = [i for i in f if i.startswith(args_config.data_name)]
+        req_data = [i for i in f if i.endswith("csv")]
     return os.path.join(r, req_data[0])
 
 def save_net(path, state):
     tt = str(time.asctime())
     img_name_save = 'net' + " " + str(re.sub('[:!@#$]', '_', tt))
     img_name_save = img_name_save.replace(' ', '_') + '.pt'
-    _dir = os.path.abspath('../')
+    _dir = os.path.abspath('./')
     path = os.path.join(_dir, path)
     t = datetime.datetime.now()
     datat = t.strftime('%m/%d/%Y').replace('/', '_')

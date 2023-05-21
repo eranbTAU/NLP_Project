@@ -1,0 +1,14 @@
+*.pdf
+*.png
+*.jpg
+*.log
+*.txt
+*.json
+*.yaml
+*.wandb
+*.pt
+*.xml
+*.xhtml
+*.iml
+*.avi
+*.tar
