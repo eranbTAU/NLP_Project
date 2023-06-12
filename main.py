@@ -17,7 +17,7 @@ parser.add_argument('--batch_size', type=int, default=32, metavar='N',
                     help='input batch size for training (default: 32)')
 parser.add_argument('--criterion', default=r'rmse', metavar='CRI',
                     help='Criterion loss. (default: rmse)')
-parser.add_argument('--model_name', type=str, default='distilbert', metavar='N',
+parser.add_argument('--model_name', type=str, default='roberta', metavar='N',
                     help='The name of the model')
 # # Optimizer parameters
 parser.add_argument('--optim', type=str, default='SGD',
@@ -26,7 +26,7 @@ parser.add_argument('--scheduler', default='step', type=str, metavar='SCHEDULER'
                     help='LR scheduler (default: "step"')
 parser.add_argument('--lr', type=float, default=1.7414537048734527e-05, metavar='LR',
                     help='learning rate')
-parser.add_argument('--epochs', type=int, default=1, metavar='N',
+parser.add_argument('--epochs', type=int, default=100, metavar='N',
                     help='number of epochs to train (default: 20)')
 parser.add_argument('--alpha', type=int, default=0.9473, metavar='N',
                     help='alpha parameter for optimizer')
@@ -51,7 +51,7 @@ def main(args_config):
 
     path = path2data(args_config)
 
-    train_data, val_data, test_data, model, label_encoder= loader(args_config, path)
+    train_data, val_data, test_data, model, label_encoder = loader(args_config, path)
 
     model = model.to(device)
 

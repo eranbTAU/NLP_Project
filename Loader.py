@@ -24,6 +24,7 @@ def loader(args_config, root_data):
     data = pd.read_csv(root_data, delimiter=',').iloc[:10000, :]
     data.drop_duplicates(inplace=True)
     data = data.dropna()
+    print('Number of class:', data['headline_category'].nunique())
 
     # Splitting the Data
     X_train, X_test, y_train, y_test = train_test_split(data['headline_text'], data['headline_category'], test_size=0.2,

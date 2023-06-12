@@ -1,19 +1,28 @@
 import torch
 from sklearn.metrics import accuracy_score
+from tqdm import tqdm
+import numpy as np
 
 def train_val(args_config, optimizer, model, train_loader, val_loader, device, label_encoder):
 
     for epoch in range(args_config.epochs):
         model.train()
-        for batch in train_loader:
+        pbar = tqdm(train_loader, total=len(train_loader))
+        train_batch = []
+        for i, batch in enumerate(pbar):
             optimizer.zero_grad()
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
             labels = batch['labels'].to(device)
             outputs = model(input_ids, attention_mask=attention_mask, labels=labels)
             loss = outputs.loss
+            train_batch.append(loss.cpu().detach().numpy())
             loss.backward()
             optimizer.step()
+
+            pbar.set_postfix({'Epoch': epoch,
+                              'Training Loss': np.mean(train_batch)
+                              })
 
         model.eval()
         predictions = []
