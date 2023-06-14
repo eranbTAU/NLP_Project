@@ -23,7 +23,7 @@ df = df.dropna(subset=['text', 'category'])  # Remove rows with missing values i
 df.drop_duplicates(inplace=True)
 
 # df = df.iloc[:2000]
-
+df = df.groupby('category').apply(lambda x: x.sample(n=df['category'].value_counts().min())).reset_index(drop=True)
 # Shuffle the data
 shuffled_data = df.sample(frac=1).reset_index(drop=True)
 
