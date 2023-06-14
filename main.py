@@ -3,6 +3,7 @@ from utils import path2data, save_net
 from Loader import loader
 import torch
 from Model_Run import train_val, evaluation
+import os
 
 # Config the parser
 parser = argparse.ArgumentParser(description='Training Config', add_help=False)
@@ -17,7 +18,7 @@ parser.add_argument('--batch_size', type=int, default=32, metavar='N',
                     help='input batch size for training (default: 32)')
 parser.add_argument('--criterion', default=r'rmse', metavar='CRI',
                     help='Criterion loss. (default: rmse)')
-parser.add_argument('--model_name', type=str, default='roberta', metavar='N',
+parser.add_argument('--model_name', type=str, default='distilbert', metavar='N',
                     help='The name of the model')
 # # Optimizer parameters
 parser.add_argument('--optim', type=str, default='SGD',
