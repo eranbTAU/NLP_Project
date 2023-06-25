@@ -35,7 +35,7 @@ parser.add_argument('--weight_decay', type=int, default=0.0067, metavar='N',
 
 # for Models
 parser.add_argument('--model_name', type=str, default='distilbert', metavar='N',
-                    help='The name of the chosen model')
+                    help='The name of the chosen model there is two options: [distilbert, bert]')
 parser.add_argument('--finetune', type=str, default='True', metavar='N',
                     help='type of pretrained model: finetune or end2end')
 
