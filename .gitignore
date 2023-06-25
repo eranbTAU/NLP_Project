@@ -12,5 +12,6 @@
 *.iml
 *.avi
 *.tar
+/__pycache__
 /data
 /models

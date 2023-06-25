@@ -10,7 +10,7 @@ from loader_models import TextClassificationModel
 parser = argparse.ArgumentParser(description='Training Config', add_help=False)
 
 # for Dataset & Path
-parser.add_argument('--data_root', default=r'~/Documents/NLP_Project/fortest', metavar='DIR',
+parser.add_argument('--data_root', default=r'~/Documents/repose/nlp_project/NLP_Project/data/', metavar='DIR',
                     help='path to folder that include dataset')
 parser.add_argument('--data_6class', default='ireland-news-headlines-cleaned-6.csv', metavar='DIR',
                     help='path to 6 class dataset')
