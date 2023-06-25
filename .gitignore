@@ -12,3 +12,5 @@
 *.iml
 *.avi
 *.tar
+/data
+/models
