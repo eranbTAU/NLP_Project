@@ -71,7 +71,7 @@ class TextClassificationModel:
         self.train_loader = DataLoader(train_dataset, batch_size=self.args_config.batch_size, shuffle=True)
         self.test_loader = DataLoader(test_dataset, batch_size=self.args_config.batch_size)
 
-    def trainModel(self):
+    def train_model(self):
         self.model.train()
         self.classifier.train()
 

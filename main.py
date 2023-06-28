@@ -76,14 +76,12 @@ def main(args_config):
     # prepare the data loaders
     model.prepare_data_loaders(train_df, test_df)
     # train the model
-    model.trainModel()
+    model.train_model()
     # evaluate the model
     model, classifier = model.evaluate()
 
     # save_net(./weights/model, model.state_dict())
     # save_net(./weights/classifier, classifier.state_dict())
-
-
 
 if __name__ == '__main__':
     args_config = parser.parse_args()
